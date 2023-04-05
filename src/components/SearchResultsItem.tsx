@@ -55,11 +55,13 @@ const SearchResultsItem = (props: Props) => {
     const clickedElement = event.target as HTMLElement;
     const artistElement = event.currentTarget as HTMLElement;
 
+    // Toggle detail visibility on click. Prevent toggle when clickin on icons.
     if (!clickedElement.classList.contains(styles['icon'])) {
       const artistDetailsElement = artistElement.querySelector('.artist-details') as HTMLElement;
       const tracklistElement = artistDetailsElement.querySelector('.tracklist') as HTMLElement;
       const trackListPopulated = artistElement?.dataset?.tracklistPopulated;
 
+      // Toggle open class for the main artist element
       artistElement.classList.toggle(styles['open']);
 
       const detailsHeight = artistDetailsElement.scrollHeight;
@@ -67,10 +69,12 @@ const SearchResultsItem = (props: Props) => {
       if (artistElement.classList.contains(styles['open'])) {
         artistDetailsElement.style.height = `${detailsHeight}px`;
 
+        // Wait for the expand animation to finish
         delay(200).then(() => {
           artistDetailsElement.style.height = `auto`;
 
           if (trackListPopulated === 'false') {
+            // Update the data attribute for loaded tracklists. No need to load them again.
             artistElement.dataset.tracklistPopulated = 'true';
             const artistName = artistElement?.dataset?.artist;
 
@@ -101,7 +105,9 @@ const SearchResultsItem = (props: Props) => {
       } else {
         artistDetailsElement.style.height = `${detailsHeight}px`;
 
+        // Wait one millisecond after setting the initial height so the collapse animation works correctly
         delay(1).then(() => {
+          // Collapse details area
           artistDetailsElement.style.height = '0px';
         });
       }

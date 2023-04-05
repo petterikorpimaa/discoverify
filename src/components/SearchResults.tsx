@@ -56,12 +56,14 @@ const SearchResults = (props: Props) => {
     let foundArtists: Artist[] = [];
 
     if (artistsSearch.length && lastFmApiKey) {
+      // Show loading animiations
       if (showMore) {
         updateIsLoadingMore(true);
       } else {
         updateIsLoading(true);
       }
 
+      // Fetch data for all artists
       const promises = [];
       for (const artistName of artistsSearch) {
         promises.push(
@@ -73,6 +75,7 @@ const SearchResults = (props: Props) => {
       Promise.all(promises).then((artists) => {
         for (const artistData of artists) {
           if (artistData) {
+            // Show loading animiations
             if (showMore) {
               updateIsLoadingMore(true);
             } else {
@@ -81,6 +84,7 @@ const SearchResults = (props: Props) => {
 
             const similarArtists = artistData?.similarartists?.artist || [];
 
+            // Combine similar artists data from all searched artists
             if (similarArtists) {
               foundArtists = foundArtists.concat(similarArtists);
             }
@@ -106,9 +110,10 @@ const SearchResults = (props: Props) => {
         // Sort artists by occurences
         foundArtists = [...foundArtists].sort((a: any, b: any) => artistOccurences[a.name] > artistOccurences[b.name] ? -1 : 1);
 
-        // Limit artists to 5
+        // Limit shown artists
         foundArtists = foundArtists.slice(0, limit);
 
+        // Hide loading animations
         if (showMore) {
           updateIsLoadingMore(false);
         } else {
@@ -130,9 +135,11 @@ const SearchResults = (props: Props) => {
     updateLfmData({});
     updateLfmDataMore({});
 
+    // Load new artists when the search terms are changed
     loadArtists({ search: searchTerms, showMore: false });
   }, [searchTerms, lastFmApiKey]);
 
+  // Handle loading more artists
   const loadMoreArtists = () => {
     loadArtists({ search: searchTerms, showMore: true, limit: 45 });
   };
