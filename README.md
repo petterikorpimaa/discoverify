@@ -6,7 +6,7 @@ Search for artists and list similar artists from Last FM database and their top 
 ## Installation
 1. Run `npm install`
 2. Create [`Last FM API account`](https://www.last.fm/api) and add your API key to the `.env.local` file.
-2. Create [`Spotify API Application`](https://developer.spotify.com/documentation/web-api/concepts/apps) and add your Client ID and Secret to the `.env.local` file.
+2. Create [`Spotify API Application`](https://developer.spotify.com/documentation/web-api/concepts/apps) and add your Client ID and Client Secret to the `.env.local` file.
 
 
 ## Running the application
