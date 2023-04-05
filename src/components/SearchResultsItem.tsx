@@ -59,6 +59,7 @@ const SearchResultsItem = (props: Props) => {
     if (!clickedElement.classList.contains(styles['icon'])) {
       const artistDetailsElement = artistElement.querySelector('.artist-details') as HTMLElement;
       const tracklistElement = artistDetailsElement.querySelector('.tracklist') as HTMLElement;
+      const tracklistHeadingElement = artistDetailsElement.querySelector('.tracklist-heading') as HTMLElement;
       const trackListPopulated = artistElement?.dataset?.tracklistPopulated;
 
       // Toggle open class for the main artist element
@@ -68,6 +69,11 @@ const SearchResultsItem = (props: Props) => {
 
       if (artistElement.classList.contains(styles['open'])) {
         artistDetailsElement.style.height = `${detailsHeight}px`;
+
+        if (trackListPopulated === 'false' && tracklistHeadingElement) {
+          // Show loading indicator
+          tracklistHeadingElement.classList.add(styles['loading']);
+        }
 
         // Wait for the expand animation to finish
         delay(200).then(() => {
@@ -94,6 +100,11 @@ const SearchResultsItem = (props: Props) => {
                       trackElement.dataset.id = topTracks[index].id;
 
                       trackElement.classList.add(styles['show']);
+
+                      if (tracklistHeadingElement) {
+                        // Hide loading indicator
+                        tracklistHeadingElement.classList.remove(styles['loading']);
+                      }
                     });
                   }
                 });
@@ -143,14 +154,8 @@ const SearchResultsItem = (props: Props) => {
 
       <div className={`${styles['artist-details']} artist-details`}>
         <div  className={styles['artist-tracklist-container']}>
-          <div className={styles['artist-tracklist-heading']}>Top tracks</div>
+          <div className={`${styles['artist-tracklist-heading']} tracklist-heading`}>Top tracks</div>
           <div className={`${styles['artist-tracklist']} tracklist`}>
-            <div className={styles['track-loader']}>
-              <div className={styles['circle1']}></div>
-              <div className={styles['circle2']}></div>
-              <div className={styles['circle3']}></div>
-            </div>
-
             <a href="#" className={`${styles['artist-tracklist__item']} artist-tracklist-item`}>&nbsp;</a>
             <a href="#" className={`${styles['artist-tracklist__item']} artist-tracklist-item`}>&nbsp;</a>
             <a href="#" className={`${styles['artist-tracklist__item']} artist-tracklist-item`}>&nbsp;</a>

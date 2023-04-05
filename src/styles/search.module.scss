@@ -174,11 +174,30 @@
       }
 
       .artist-tracklist-heading {
+        display: inline-block;
+        position: relative;
         margin-left: 8px;
         margin-bottom: 8px;
         font-size: 14px;
         font-weight: 700;
         color: #444444;
+
+        &.loading {
+          &::after {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: calc(50% - 5px);
+            right: -20px;
+            border-radius: 50%;
+            border-top: 1px solid #62ffcc;
+            border-left: 1px solid #62ffcc;
+            border-right: 1px solid transparent;
+            animation: spinner 0.8s linear infinite;
+          }
+        }
       }
 
       .artist-tracklist {
@@ -325,7 +344,7 @@
           border-radius: 50%;
           border-top: 1px solid #62ffcc;
           border-right: 1px solid transparent;
-          animation: buttonSpinner 0.8s linear infinite;
+          animation: spinner 0.8s linear infinite;
         }
       }
     }
@@ -349,7 +368,7 @@
     left: 0;
     opacity: 0.6;
     transform: rotate(-90deg);
-    animation: loaderSpin 6s infinite linear;
+    animation: waves 6s infinite linear;
 
     &:nth-of-type(2) {
       width: 96vw;
@@ -380,7 +399,7 @@
   }
 }
 
-@keyframes loaderSpin {
+@keyframes waves {
   to {
     transform: rotate(-450deg);
   }
@@ -398,7 +417,7 @@
   }
 }
 
-@keyframes buttonSpinner {
+@keyframes spinner {
   to {
     transform: rotate(360deg);
   }
