@@ -1,11 +1,11 @@
 # Discoverify
 
-Search for artists and list similar artists from Last FM database and their top songs from Spotify.
+Search for artists and list similar artists from Last.fm database and their top songs from Spotify.
 
 
 ## Installation
 1. Run `npm install`
-2. Create [`Last FM API account`](https://www.last.fm/api) and add your API key to the `.env.local` file.
+2. Create [`Last.fm API account`](https://www.last.fm/api) and add your API key to the `.env.local` file.
 2. Create [`Spotify API Application`](https://developer.spotify.com/documentation/web-api/concepts/apps) and add your Client ID and Client Secret to the `.env.local` file.
 
 
@@ -21,7 +21,7 @@ Search for an artist and the application will list the five most similar artists
 You can search and combine multiple artists by separating the artist names with a comma.
 If the artist name has a comma in it you can add quote marks around it and it handles the artist search correctly.
 
-There are direct links to the artist's page on Last FM and Spotify application.
+There are direct links to the artist's page on Last.fm and Spotify application.
 
 Clicking on the magnifying glass icon you can add that artist directly to the search input.
 
