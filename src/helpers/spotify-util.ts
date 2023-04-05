@@ -15,7 +15,7 @@ export function getSpotifyAccessToken() {
     // Set Spotify access token from session storage
     response = spotifyAccessToken;
   } else if ((!spotifyAccessToken || spotifyAccessTokenExpired) && spotifyClientId && spotifyClientSecret) {
-    // Get Spotify access token from API
+    // Get Spotify access token from API if it doesn't exist yet or if it's expired
     fetchSpotifyAccessTokenData(spotifyClientId, spotifyClientSecret).then((data) => {
       const accessTokenData = {
         access_token: data?.access_token,
